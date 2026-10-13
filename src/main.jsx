@@ -7,6 +7,7 @@ import './styles.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { events } from './data/events';
 import { resources } from './data/resources';
 
 import Arrow from './components/Arrow';
@@ -15,6 +16,7 @@ import Hero from './components/Hero';
 import StatsStrip from './components/StatsStrip';
 import Toolchain from './components/Toolchain';
 import Ticker from './components/Ticker';
+import EventList from './components/EventList';
 import PastEvents from './components/PastEvents';
 import Leaderboard from './components/Leaderboard';
 import ResourceGrid from './components/ResourceGrid';
@@ -22,6 +24,7 @@ import About from './components/About';
 import JoinCTA from './components/JoinCTA';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import EventsPage from './pages/EventsPage';
 import StandalonePage from './pages/StandalonePage';
 import TeamPage from './pages/TeamPage';
 
@@ -29,30 +32,6 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [path, setPath] = useState(window.location.pathname);
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const lenis = new Lenis({
-      duration: 1.6,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 0.8,
-      touchMultiplier: 1.2,
-    });
-
-    let rafId;
-    function raf(time) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-    };
-  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -200,40 +179,26 @@ function App() {
     };
   }, [path]);
   useEffect(() => {
-    const items = document.querySelectorAll(
-      '.reveal-on-scroll,.scroll-reveal,.scroll-paragraph-reveal,' +
-        '.section-head,.about-copy > p,.join p,.faq-list,.activity-inner > div:first-child',
-    );
-    if (!items.length) return undefined;
-    if (!('IntersectionObserver' in window)) {
-      items.forEach((item) => item.classList.add('is-visible'));
-      return undefined;
-    }
-    const paragraphs = document.querySelectorAll('.scroll-paragraph-reveal');
-    const paragraphMotions = ['up', 'left', 'right', 'scale'];
-    paragraphs.forEach((paragraph, index) => {
-      paragraph.dataset.revealMotion = paragraphMotions[index % paragraphMotions.length];
-    });
-    items.forEach((item, index) => {
-      item.style.setProperty('--reveal-delay', `${Math.min(index % 6, 5) * 70}ms`);
-    });
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          } else {
-            entry.target.classList.remove('is-visible');
-          }
-        }),
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.15 },
-    );
-    items.forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
-
+    let observer = null;
     const timer = setTimeout(() => {
-      const items = document.querySelectorAll('.reveal-on-scroll, .scroll-reveal, .section-reveal');
-      const observer = new IntersectionObserver(
+      const items = document.querySelectorAll(
+        '.reveal-on-scroll, .scroll-reveal, .section-reveal, .scroll-paragraph-reveal, ' +
+          '.section-head, .about-copy > p, .join p, .faq-list, .activity-inner > div:first-child',
+      );
+      if (!items.length) return;
+      if (!('IntersectionObserver' in window)) {
+        items.forEach((item) => item.classList.add('is-visible'));
+        return;
+      }
+      const paragraphs = document.querySelectorAll('.scroll-paragraph-reveal');
+      const paragraphMotions = ['up', 'left', 'right', 'scale'];
+      paragraphs.forEach((paragraph, index) => {
+        paragraph.dataset.revealMotion = paragraphMotions[index % paragraphMotions.length];
+      });
+      items.forEach((item, index) => {
+        item.style.setProperty('--reveal-delay', `${Math.min(index % 6, 5) * 70}ms`);
+      });
+      observer = new IntersectionObserver(
         (entries) =>
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -245,12 +210,14 @@ function App() {
         { threshold: 0.05, rootMargin: '0px 0px -20px 0px' },
       );
       items.forEach((item) => observer.observe(item));
-      return () => observer.disconnect();
     }, 60);
 
-    return () => clearTimeout(timer);
-
+    return () => {
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
   }, [path]);
+  if (path === '/events') return <EventsPage />;
   if (path === '/team') return <TeamPage />;
   if (path !== '/') return <StandalonePage path={path} />;
   return (
@@ -262,7 +229,21 @@ function App() {
         <StatsStrip />
         <Toolchain />
         <Ticker />
-        <section className="section container" id="events">
+        <section className="section container section-reveal" id="events">
+          <div className="section-head">
+            <div>
+              <span className="kicker">02 / ACTIVITY</span>
+              <h2 className="reveal-title">
+                Things worth
+                <br />
+                <em>showing up</em> for.
+              </h2>
+            </div>
+            <a className="text-link" href="/events">
+              View all events <Arrow />
+            </a>
+          </div>
+          <EventList items={events} />
           <PastEvents landing />
         </section>
         <Leaderboard />

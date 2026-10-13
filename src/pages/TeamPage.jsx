@@ -11,7 +11,7 @@ function TeamPage() {
 
   return (
     <div id="top" className="team-page">
-      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} currentPath="/team" />
       <main className="team-page-main">
         <section className="team-directory section">
           <div className="container">
