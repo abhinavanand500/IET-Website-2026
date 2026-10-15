@@ -16,7 +16,7 @@ function Footer() {
             <small>EXPLORE</small>
             <a href="#about">About</a>
             <a href="#events">Events</a>
-            <a href="#resources">Resources</a>
+            <a href="/gallery">Gallery</a>
             <a href="#join">Join IET</a>
           </div>
           <div>

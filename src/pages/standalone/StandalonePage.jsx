@@ -1,0 +1,171 @@
+import { useState } from 'react';
+import Arrow from '../../components/Arrow';
+import Navbar from '../../components/Navbar';
+import { pageContent } from './data/pages';
+import ImageCarousel from '../about/components/ImageCarousel';
+import SocialsSection from '../about/components/SocialsSection';
+import TimelineSection from '../about/components/TimelineSection';
+import AchievementsSection from '../about/components/AchievementsSection';
+import TechLinesHud from '../about/components/TechLinesHud';
+import MatrixRain from '../about/components/MatrixRain';
+import TuxMascot from '../about/components/TuxMascot';
+const aboutHands = '/assets/about/about-hands.png';
+const aboutInitiatives = '/assets/about/about-initiatives.png';
+
+function StandalonePage({ path }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [label, title, desc] = pageContent[path] || pageContent['/about'];
+
+  const handleSpotlight = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+  };
+
+  return (
+    <>
+      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} currentPath={path} />
+
+      <main>
+        <section className={`page-hero container ${path === '/about' ? 'page-hero-about' : ''}`}>
+          <div className="page-hero-content">
+            <span className="kicker">IET / {label}</span>
+            {path === '/about' ? (
+              <h1>
+                Working together to
+                <br />
+                engineer a better
+                <br />
+                <em>world.</em>
+              </h1>
+            ) : (
+              <h1>{title}</h1>
+            )}
+            <p>{desc}</p>
+          </div>
+          {path === '/about' && (
+            <div
+              className="page-hero-art interactive-art"
+              onMouseMove={handleSpotlight}
+              aria-label="IET Hands Graphic"
+            >
+              <img src={aboutHands} alt="IET Connection" />
+            </div>
+          )}
+        </section>
+        {path === '/about' && <TechLinesHud />}
+        <section className={`page-body container ${path === '/about' ? 'page-body-about' : ''}`}>
+          {path === '/about' ? (
+            <>
+              <div className="about-initiatives-section section-reveal">
+                <div
+                  className="about-initiatives-art interactive-art"
+                  onMouseMove={handleSpotlight}
+                  aria-label="IET Chapter Initiatives"
+                >
+                  <img src={aboutInitiatives} alt="IET Chapter Initiatives" />
+                </div>
+                <div className="about-right-wrapper">
+                  <span className="kicker">CHAPTER INITIATIVES</span>
+                  <h2>
+                    What we <em>do??</em>
+                  </h2>
+                  <p>
+                    At the IET BIT Mesra Student Chapter, we build practical problem-solving and
+                    technical proficiency through focused C++ workshops and dynamic campus
+                    competitions. From high-pressure programming challenges like{' '}
+                    <strong>Rewind Recode</strong> and <strong>Blind Coding</strong> to
+                    collaborative problem-solving in <strong>Split Solve</strong> and end-to-end
+                    interview simulations with <strong>SWE Quest</strong>, we provide platforms that
+                    test logic under real-world constraints.
+                  </p>
+                  <p>
+                    Our core mission is bridging the gap between foundational data structures and
+                    competitive execution, empowering students to sharpen their algorithmic skills
+                    and excel in software engineering.
+                  </p>
+                  <div className="page-body-actions">
+                    <a className="button primary" href="/events">
+                      <span className="btn-icon-circle">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 0C12 6.627 6.627 12 0 12c6.627 0 12 5.627 12 12 0-6.627 5.627-12 12-12-6.627 0-12-5.627-12-12z" />
+                        </svg>
+                      </span>
+                      <span>Explore Events</span>
+                    </a>
+                    <a className="button outline" href="/">
+                      <span className="btn-icon-circle">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <line x1="7" y1="17" x2="17" y2="7" />
+                          <polyline points="7 7 17 7 17 17" />
+                        </svg>
+                      </span>
+                      <span>Back to home</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <ImageCarousel />
+              <TimelineSection />
+              <div
+                className="quote-matrix-wrapper section-reveal"
+                onMouseMove={handleSpotlight}
+              >
+                <MatrixRain />
+                <div className="quote-section container">
+                  <blockquote className="quote-block">
+                    <p className="quote-body">
+                      <span className="quote-line-white">"Talk is cheap,</span>
+                      <span className="quote-line-highlight">show me the code."</span>
+                    </p>
+                    <cite className="quote-author">LINUS TORVALDS</cite>
+                  </blockquote>
+                </div>
+                <TuxMascot />
+              </div>
+              <AchievementsSection />
+              <SocialsSection />
+            </>
+          ) : (
+            <>
+              <span className="kicker">STATIC FRONTEND PREVIEW</span>
+              <h2>
+                Built for the next
+                <br />
+                <em>chapter.</em>
+              </h2>
+              <p>
+                Content for this route is ready to connect to the IET API in a later phase. For now,
+                this presentation layer keeps the hierarchy, interaction and responsive behavior in
+                place.
+              </p>
+              <a className="button outline" href="/">
+                Back to home <Arrow />
+              </a>
+            </>
+          )}
+        </section>
+      </main>
+      <footer className="standalone-footer">
+        <div className="container footer-bottom">
+          <span>© 2026 IET Club</span>
+          <span>
+            Built by the IET Developer Team <Arrow />
+          </span>
+        </div>
+      </footer>
+    </>
+  );
+}
+
+export default StandalonePage;

@@ -1,4 +1,4 @@
-import { pastEvents } from '../data/events';
+import { pastEvents } from '../pages/events/data/events';
 
 function PastEvents({ splitWorkshops = false, onLearnMore, landing = false }) {
   const renderPoster = (event, index) => (
