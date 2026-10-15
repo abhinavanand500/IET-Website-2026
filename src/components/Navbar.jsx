@@ -17,9 +17,7 @@ function Navbar({ menuOpen, setMenuOpen, currentPath = '' }) {
           {[
             ['About', '/about'],
             ['Events', '/events'],
-            ['Resources', '/resources'],
-            ['Projects', '/projects'],
-            ['Community', '/community'],
+            ['Gallery', '/gallery'],
             ['Team', '/team'],
           ].map(([x, h]) => (
             <a

@@ -5,7 +5,7 @@ node_modules/
 dist/
 
 # Public assets
-/public/
+
 
 # Local environment files
 .env

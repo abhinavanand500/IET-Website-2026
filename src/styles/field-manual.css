@@ -9,7 +9,7 @@ body {
   font-family: Manrope, Arial, sans-serif;
 }
 .nav {
-  height: 92px;
+  height: 76px;
   background: #080a0c;
   border-bottom: 1px solid #30363a;
 }
@@ -433,7 +433,7 @@ footer {
 }
 @media (max-width: 760px) {
   .nav {
-    height: 76px;
+    height: 64px;
   }
   .nav-inner {
     padding: 0 20px;
@@ -443,7 +443,7 @@ footer {
     bottom: -16px;
   }
   nav {
-    top: 60px;
+    top: 48px;
   }
   .logo img {
     width: 106px;

@@ -7,31 +7,21 @@ import './styles.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-import { events } from './data/events';
-import { resources } from './data/resources';
+import EventsPage from './pages/events/EventsPage';
+import GalleryPage from './pages/gallery/GalleryPage';
+import HomePage from './pages/home/HomePage';
+import StandalonePage from './pages/standalone/StandalonePage';
+import TeamPage from './pages/team/TeamPage';
 
-import Arrow from './components/Arrow';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import StatsStrip from './components/StatsStrip';
-import Toolchain from './components/Toolchain';
-import Ticker from './components/Ticker';
-import EventList from './components/EventList';
-import PastEvents from './components/PastEvents';
-import Leaderboard from './components/Leaderboard';
-import ResourceGrid from './components/ResourceGrid';
-import About from './components/About';
-import JoinCTA from './components/JoinCTA';
-import FAQ from './components/FAQ';
-import Footer from './components/Footer';
-import EventsPage from './pages/EventsPage';
-import StandalonePage from './pages/StandalonePage';
-import TeamPage from './pages/TeamPage';
+const replacedPagePaths = new Set(['/resources', '/projects', '/community']);
+
+function getCurrentPath() {
+  const currentPath = window.location.pathname;
+  return replacedPagePaths.has(currentPath) ? '/gallery' : currentPath;
+}
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [openFaq, setOpenFaq] = useState(null);
-  const [path, setPath] = useState(window.location.pathname);
+  const [path, setPath] = useState(getCurrentPath);
 
   useEffect(() => {
     let frame = 0;
@@ -39,10 +29,7 @@ function App() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const scrollRatio = max > 0 ? window.scrollY / max : 0;
       const hero = document.querySelector('.hero');
-      document.documentElement.style.setProperty(
-        '--scroll-progress',
-        `${scrollRatio * 100}%`,
-      );
+      document.documentElement.style.setProperty('--scroll-progress', `${scrollRatio * 100}%`);
       document.documentElement.style.setProperty('--scroll-ratio', scrollRatio.toFixed(3));
       document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
       const art = document.querySelector('.hero-art');
@@ -68,26 +55,28 @@ function App() {
     };
   }, []);
   useEffect(() => {
-    const sync = () => setPath(window.location.pathname);
+    if (path !== window.location.pathname) {
+      window.history.replaceState({}, '', path);
+    }
+    const sync = () => setPath(getCurrentPath());
     window.addEventListener('popstate', sync);
     return () => window.removeEventListener('popstate', sync);
-  }, []);
+  }, [path]);
   useEffect(() => {
     const links = document.querySelectorAll('a[href^="/"]');
     const handleClick = (e) => {
       const href = e.currentTarget.getAttribute('href');
       if (!href || href.startsWith('/#')) return;
+      const destination = replacedPagePaths.has(href) ? '/gallery' : href;
       e.preventDefault();
-      window.history.pushState({}, '', href);
-      setPath(href);
-      setMenuOpen(false);
+      window.history.pushState({}, '', destination);
+      setPath(destination);
       window.scrollTo(0, 0);
     };
     links.forEach((link) => link.addEventListener('click', handleClick));
     return () => links.forEach((link) => link.removeEventListener('click', handleClick));
   }, [path]);
   useEffect(() => {
-
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const smallScreen = window.matchMedia('(max-width: 760px)').matches;
     let lenis = null;
@@ -167,7 +156,6 @@ function App() {
           scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom bottom', scrub: true },
         });
       }
-
     });
     return () => {
       if (lenis) {
@@ -219,56 +207,8 @@ function App() {
   }, [path]);
   if (path === '/events') return <EventsPage />;
   if (path === '/team') return <TeamPage />;
+  if (path === '/gallery') return <GalleryPage />;
   if (path !== '/') return <StandalonePage path={path} />;
-  return (
-    <div id="top">
-      <div className="scroll-progress" aria-hidden="true"></div>
-      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} currentPath={path} />
-      <main>
-        <Hero />
-        <StatsStrip />
-        <Toolchain />
-        <Ticker />
-        <section className="section container section-reveal" id="events">
-          <div className="section-head">
-            <div>
-              <span className="kicker">02 / ACTIVITY</span>
-              <h2 className="reveal-title">
-                Things worth
-                <br />
-                <em>showing up</em> for.
-              </h2>
-            </div>
-            <a className="text-link" href="/events">
-              View all events <Arrow />
-            </a>
-          </div>
-          <EventList items={events} />
-          <PastEvents landing />
-        </section>
-        <Leaderboard />
-        <section className="section container section-reveal" id="resources">
-          <div className="section-head">
-            <div>
-              <span className="kicker">04 / RESOURCE VAULT</span>
-              <h2 className="reveal-title">
-                Learn in public.
-                <br />
-                <em>Keep going.</em>
-              </h2>
-            </div>
-            <a className="text-link" href="/resources">
-              Open the vault <Arrow />
-            </a>
-          </div>
-          <ResourceGrid items={resources} />
-        </section>
-        <About />
-        <FAQ openFaq={openFaq} setOpenFaq={setOpenFaq} />
-        <JoinCTA />
-      </main>
-      <Footer />
-    </div>
-  );
+  return <HomePage />;
 }
 createRoot(document.getElementById('root')).render(<App />);

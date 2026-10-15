@@ -6,7 +6,8 @@
 @import url('./styles/details.css');
 @import url('./styles/brand.css');
 @import url('./styles/ambient.css');
-@import url('./styles/events.css');
-@import url('./styles/timeline.css');
-@import url('./styles/achievements.css');
-@import url('./styles/team.css');
+@import url('./pages/events/styles/events.css');
+@import url('./pages/about/styles/timeline.css');
+@import url('./pages/about/styles/achievements.css');
+@import url('./pages/team/styles/team.css');
+@import url('./pages/gallery/styles/gallery.css');
