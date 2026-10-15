@@ -3,7 +3,7 @@ import EventModal from './components/EventModal';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import PastEvents from '../../components/PastEvents';
-import ietLogo from '../../assets/shared/iet-bit-mesra.svg';
+const ietLogo = '/assets/shared/iet-bit-mesra.svg';
 
 function EventsPage() {
   const [menuOpen, setMenuOpen] = useState(false);

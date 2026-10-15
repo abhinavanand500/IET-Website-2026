@@ -9,8 +9,8 @@ import AchievementsSection from '../about/components/AchievementsSection';
 import TechLinesHud from '../about/components/TechLinesHud';
 import MatrixRain from '../about/components/MatrixRain';
 import TuxMascot from '../about/components/TuxMascot';
-import aboutHands from '../../assets/pages/about/about-hands.png';
-import aboutInitiatives from '../../assets/pages/about/about-initiatives.png';
+const aboutHands = '/assets/about/about-hands.png';
+const aboutInitiatives = '/assets/about/about-initiatives.png';
 
 function StandalonePage({ path }) {
   const [menuOpen, setMenuOpen] = useState(false);

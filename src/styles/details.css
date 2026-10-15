@@ -894,7 +894,7 @@
   transform: translate(-50%, calc(-50% - 20px));
   width: min(390px, 56vw);
   height: min(200px, 29vw);
-  background: url('../assets/shared/iet-logo-bg.svg') center / contain no-repeat;
+  background: url('/assets/shared/iet-logo-bg.svg') center / contain no-repeat;
   opacity: 0.14;
   mix-blend-mode: screen;
   filter: drop-shadow(0 0 10px rgba(125, 54, 147, 0.25));

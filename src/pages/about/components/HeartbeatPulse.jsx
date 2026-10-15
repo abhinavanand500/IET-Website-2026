@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import heartbeatMp4 from '../../../assets/pages/about/heartbeat-pulse-clean.mp4';
-import heartbeatWebm from '../../../assets/pages/about/heartbeat-pulse-clean.webm';
+const heartbeatMp4 = '/assets/about/heartbeat-pulse-clean.mp4';
+const heartbeatWebm = '/assets/about/heartbeat-pulse-clean.webm';
 
 function HeartbeatPulse({ className = '' }) {
   const videoRef = useRef(null);

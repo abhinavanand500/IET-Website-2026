@@ -1,4 +1,3 @@
-import icpcImage from '../../../assets/pages/gallery/icpc-amritapuri.jpg';
 import '../styles/achievements.css';
 
 function AchievementsSection() {
@@ -15,7 +14,7 @@ function AchievementsSection() {
       circle: "#55",
       kicker: "ICPC REGIONALS",
       title: "ICPC Amritapuri",
-      image: icpcImage,
+      image: '/assets/gallery/icpc-amritapuri.jpg',
       position: "center 15%",
       quote: "Rank 55 out of ~310 teams at the ICPC Amritapuri Multisite Regionals as a 2nd-year team from BIT Mesra.",
       desc: "Team Trie Again · 2nd-Year",

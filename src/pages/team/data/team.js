@@ -15,18 +15,6 @@ const executive = [
   ['shantanu-singh', 'Shantanu Singh', 'Design Head', '#534ab7'],
 ];
 
-const k24Photos = import.meta.glob('../../../assets/pages/team/k24/*.{jpg,jpeg,png}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-});
-
-const k23Photos = import.meta.glob('../../../assets/pages/team/k23/*.{jpg,jpeg,png}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-});
-
 const photoUrls = {
   'aaroh-sinha': 'aaroh-sinha.jpeg',
   'anas-ghayas': 'anas-ghayas.jpg',
@@ -44,21 +32,13 @@ const photoUrls = {
   'yash-raj-dubey': 'yash-raj-dubey.jpg',
 };
 
-const k23PhotoUrls = Object.fromEntries(
-  Object.entries(k23Photos).map(([path, url]) => [path.split('/').pop(), url]),
-);
-
-const k24PhotoUrls = Object.fromEntries(
-  Object.entries(k24Photos).map(([path, url]) => [path.split('/').pop(), url]),
-);
-
 export const teamMembers = executive.map(([id, name, role, accent], index) => ({
   id,
   name,
   role,
   category: 'core',
   year: 'Executive Body 2026-27',
-  photoUrl: k24PhotoUrls[photoUrls[id]] || '',
+  photoUrl: photoUrls[id] ? `/assets/team/k24/${photoUrls[id]}` : '',
   bio: `Leads ${role.toLowerCase()} initiatives across IET.`,
   links:
     {
@@ -169,7 +149,7 @@ export const k23TeamMembers = k23Executive.map(([id, name, role, accent, photo])
   role,
   category: 'core',
   year: 'K23 Executive Body',
-  photoUrl: k23PhotoUrls[photo] || '',
+  photoUrl: `/assets/team/k23/${photo}`,
   bio: `Serves as ${role.toLowerCase()} for IET.`,
   links:
     {

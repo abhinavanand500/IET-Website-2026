@@ -1,5 +1,5 @@
 import Arrow from '../../../components/Arrow';
-import ietLogo from '../../../assets/shared/iet-bit-mesra.svg';
+const ietLogo = '/assets/shared/iet-bit-mesra.svg';
 
 function Hero() {
   const spotlight = (e) => {

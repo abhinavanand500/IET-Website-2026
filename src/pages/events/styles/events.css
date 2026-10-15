@@ -181,7 +181,7 @@
   left: 50%;
   width: min(470px, 56vw);
   height: 470px;
-  background: url('../../../assets/shared/iet-bit-mesra.svg') center / contain no-repeat;
+  background: url('/assets/shared/iet-bit-mesra.svg') center / contain no-repeat;
   filter: grayscale(1) brightness(1.6) sepia(1) hue-rotate(205deg) saturate(7)
     drop-shadow(0 0 18px rgba(145, 92, 255, 0.7));
   opacity: 0.06;
@@ -1229,7 +1229,7 @@
   transform: translate(-50%, -50%);
   width: min(380px, 68vw);
   height: min(380px, 68vw);
-  background: url('../../../assets/shared/iet-bit-mesra.svg') center / contain no-repeat;
+  background: url('/assets/shared/iet-bit-mesra.svg') center / contain no-repeat;
   opacity: 0.13;
   filter: drop-shadow(0 0 35px rgba(168, 85, 247, 0.85)) hue-rotate(210deg) saturate(2);
   pointer-events: none;

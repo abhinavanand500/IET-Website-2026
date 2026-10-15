@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import tuxOutline from '../../../assets/pages/about/tux-outline.svg';
+const tuxOutline = '/assets/about/tux-outline.svg';
 
 const THEME_ICONS = [
   {
