@@ -69,6 +69,13 @@
 .page-hero-about::after {
   display: none;
 }
+#about.page-hero-about {
+  padding-top: clamp(80px, 8vw, 110px);
+  padding-bottom: clamp(75px, 8vw, 100px);
+}
+#about.page-hero-about .kicker {
+  color: #a78bfa;
+}
 .about-pulse-divider {
   position: relative;
   width: 100%;
@@ -760,6 +767,10 @@
     flex-direction: column;
     align-items: flex-start;
     min-height: auto;
+  }
+  #about.page-hero-about {
+    padding-top: 55px;
+    padding-bottom: 50px;
   }
   .page-hero-about .page-hero-art {
     position: relative;
