@@ -11,7 +11,6 @@ import Hero from './components/Hero';
 import JoinCTA from './components/JoinCTA';
 import StatsStrip from './components/StatsStrip';
 import Ticker from './components/Ticker';
-import Toolchain from './components/Toolchain';
 import { events } from '../events/data/events';
 
 function HomePage() {
@@ -25,7 +24,7 @@ function HomePage() {
       <main>
         <Hero />
         <StatsStrip />
-        <Toolchain />
+        <About />
         <Ticker />
         <section className="section container section-reveal" id="events">
           <div className="section-head">
@@ -45,7 +44,6 @@ function HomePage() {
           <PastEvents landing />
         </section>
         <GallerySection />
-        <About />
         <FAQ openFaq={openFaq} setOpenFaq={setOpenFaq} />
         <JoinCTA />
       </main>
