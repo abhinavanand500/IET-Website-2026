@@ -12,11 +12,7 @@ function About() {
       <div className="page-hero-content">
         <span className="kicker">01 / ABOUT THE IET</span>
         <h1>
-          Working together to
-          <br />
-          engineer a better
-          <br />
-          <em>world.</em>
+          About <em>us.</em>
         </h1>
         <p>
           We are the IET and we inspire, inform and influence the global engineering community to

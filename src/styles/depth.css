@@ -76,6 +76,12 @@
 #about.page-hero-about .kicker {
   color: #a78bfa;
 }
+#about.page-hero-about h1 {
+  margin-bottom: 40px;
+}
+#about.page-hero-about .page-hero-art {
+  top: calc(50% + 28px);
+}
 .about-pulse-divider {
   position: relative;
   width: 100%;
