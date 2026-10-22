@@ -3,12 +3,12 @@ import '../styles/achievements.css';
 function AchievementsSection() {
   const achievements = [
     {
-      circle: "500+",
+      circle: "200+",
       kicker: "STRONG NETWORK",
       title: "Growing Together",
       image: '/assets/about/growing-together.jpg',
       position: "center 20%",
-      quote: "Over 500 active developers and engineers across campus",
+      quote: "Over 200 active developers and engineers across campus",
       desc: "Peer-to-peer learning culture",
     },
     {

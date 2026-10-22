@@ -14,16 +14,10 @@ const gallerySlides = [
     offset: 'center',
   },
   {
-    src: '/assets/about/swe-quest.jpg',
-    label: 'SWE QUEST, 2026',
-    size: 'small',
-    offset: 'bottom',
-  },
-  {
     src: '/assets/about/rewind-recode.jpg',
     label: 'REWIND RECODE, 2026',
     size: 'medium',
-    offset: 'top',
+    offset: 'bottom',
   },
   {
     src: '/assets/about/blind-coding.png',
